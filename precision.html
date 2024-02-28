@@ -19,30 +19,32 @@
     <button class="btn btn-success" onclick="recordTime()">Stop Timer</button>
   </div>
   <script>
-  let stopTime;
-  function recordTime() {
-    stopTime = Date.now();
-    console.log(stopTime);
-  }
-
-  function startTime() {
-    var startTime = Date.now();
-    let randomv = Math.floor(Math.random() * 9) + 2;
-    for (let i = 0; i < randomv; i++) {
-      setTimeout(function () {
-        document.getElementById("counter").innerHTML = i;
-      }, (4 - i) * 1000);
+    let stopTime;
+    
+    function recordTime() {
+      stopTime = Date.now();
+      console.log(stopTime);
     }
-    setTimeout(function() {
-      if (typeof stopTime === "undefined") {
-        document.getElementById("timer").innerHTML = "Too Slow";
-      } else {
-        stopTime = Date.now();
-        let elapsedTime = stopTime - startTime;
-        document.getElementById("timer").innerHTML = "Time was " + elapsedTime;
+    function startTime() {
+      let startTime = Date.now();
+      let randomValue = Math.floor(Math.random() * 9) + 2; // Random starting value between 2 and 10
+      document.getElementById("counter").innerHTML = randomValue;
+
+      for (let i = 0; i < randomValue; i++) {
+        setTimeout(function () {
+          document.getElementById("counter").innerHTML = randomValue - i;
+        }, (randomValue - i) * 1000);
       }
-    }, 4000);
-  }
+      setTimeout(function() {
+        if (typeof stopTime === "undefined") {
+          document.getElementById("timer").innerHTML = "Too Slow";
+        } else {
+          stopTime = Date.now();
+          let elapsedTime = stopTime - startTime;
+          document.getElementById("timer").innerHTML = "Time was " + elapsedTime;
+        }
+      }, randomValue * 1000);
+    }
   </script>
 </body>
 </html>
